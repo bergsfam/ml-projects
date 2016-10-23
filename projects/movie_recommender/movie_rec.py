@@ -3,7 +3,7 @@
 ### how can I display a score with the movie?
 ### how can I investigate the data?
 ### how can I investigate the model, what is it doing? Can I show it graphically?
-
+### how does LightFM work?
 
 import numpy as np
 from lightfm.datasets import fetch_movielens
