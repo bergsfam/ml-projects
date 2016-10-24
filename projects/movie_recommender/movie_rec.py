@@ -3,10 +3,12 @@
 ### how can I display a score with the movie?
 ### how can I investigate the data?
 ### how can I investigate the model, what is it doing? Can I show it graphically?
-### how does LightFM work?
+### how does LightFM work? - See https://arxiv.org/pdf/1507.08439v1.pdf
 
 import numpy as np
 from lightfm.datasets import fetch_movielens
+from lightfm.evaluation import precision_at_k
+from lightfm.evaluation import auc_score
 from lightfm import LightFM
 # LightFM is a library that helps to create a hybrid fetch_movielens system
 # Hybrid fetch_movielens system = collaborative and content recommender
@@ -20,10 +22,12 @@ print "*" * 30
 print "****** Look at the data ******"
 print "*" * 30
 
-print(repr(data['train']))
-print(repr(data['test']))
+for key, value in data.items():
+    print(key, value)
 
-print data['train'].shape
+print "Training data shape: ", data['train'].shape
+print "Testing data shape: ", data['test'].shape
+
 print "*" * 30
 print "*" * 30
 print "*" * 30
@@ -35,6 +39,23 @@ model = LightFM(loss = 'warp')
 
 # train model
 model.fit(data['train'], epochs=30, num_threads=2)
+
+print "\n\n\n"
+
+train_precision = precision_at_k(model, data['train'], k=10).mean()
+test_precision = precision_at_k(model, data['test'], k=10).mean()
+
+train_auc = auc_score(model, data['train']).mean()
+test_auc = auc_score(model, data['test']).mean()
+
+print('Precision: train %.2f, test %.2f.' % (train_precision, test_precision))
+print('AUC: train %.2f, test %.2f.' % (train_auc, test_auc))
+
+print "*" * 30
+print "*" * 30
+print "*" * 30
+
+print "\n\n\n"
 
 # function to take in model(above), the data (also above), and a list of users
 def sample_recommendation(model, data, user_ids):
