@@ -1,0 +1,19 @@
+The Case for the Trash Man
+
+In a city the central authority is generally in charge of the utilities.  This could include water, gas, electricity, and, of course, trash pickup.  These functions provided by a central authority make it possible to cook and bathe, to provide heat and cooling, to give power to homes and businesses, and to keep the whole city clean and habitable.
+
+Similarly the actuarial department has a group of people dedicated to keeping the lights on and the other groups running as smoothly as possible - the MMA group.  Typically this group has been in charge of developing ALFA models, keeping up the grid, and providing some back end support.  This could be likened to providing power to the rest of the department.
+
+I see a number of places where I can add value to the team and to the department as a whole.
+
+1) Prioritize projects taken on by the team - use the model developed by the Data Science Group.
+2) Build excel templates to be used by the department to provide consistent analysis.
+3) Build tools to streamline backend analysis
+   - DB interfaces
+   - UI & UX
+   - Scripts
+4) Automated testing environments
+5) Tools to validate files on the network
+   - files not touched in the past year - get archived
+   - duplicate files get managed
+6) Build up model documentation
