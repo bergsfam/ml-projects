@@ -26,8 +26,13 @@ def scan(input_words):
         elif word in stop_words:
             output_words.append(('stop', word))
 
-        
+        elif word in noun_words:
+            output_words.append(('noun', word))
+
+        elif convert_number(word):
+            output_words.append(('number', convert_number(word)))
+
         else:
-            output_words.append('WHOOPS!')
+            output_words.append(('error', word))
 
     return output_words
