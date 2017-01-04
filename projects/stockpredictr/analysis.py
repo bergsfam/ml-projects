@@ -1,7 +1,6 @@
 import pandas_datareader.data as web
 import pandas as pd
 import numpy as np
-import datetime as dt
 
 def get_data(start, end, symbols):
     data = pd.DataFrame()
@@ -17,7 +16,7 @@ def allocate_data(raw_data, allocations, start_val):
     port_data['Portfolio'] = port_data.sum(axis=1)
     return port_data
 
-def calc_sharpe_ratio(df_returns, risk_free, sample_freq):
+def calc_sharpe_ratio(df_returns, risk_free=0.0, sample_freq=252.0):
     df_returns = df_returns - risk_free
     mean = df_returns.mean()
     std = df_returns.std()
@@ -25,7 +24,7 @@ def calc_sharpe_ratio(df_returns, risk_free, sample_freq):
     sharpe_ratio = mean / std * K
     return sharpe_ratio
 
-def compute_portfolio_stats(prices, rfr, sf):
+def compute_portfolio_stats(prices, rfr=0.0, sf=252.0):
     cum_return = prices['Portfolio'][-1] / prices['Portfolio'][0] - 1
     daily_rets = prices['Portfolio'].pct_change().dropna()
     avg_daily_return = daily_rets.mean()
@@ -49,11 +48,11 @@ def assess_portfolio(sd, ed, syms, allocs, sv, rfr=0.0, sf=252.0, gen_plot=False
     print "Start Date:", sd
     print "End Date:", ed
     print "Symbols:", syms
-    print "Allocations:", allocs
-    print "Sharpe Ratio:", sr
-    print "Volatility (stdev of daily returns):", sddr
-    print "Average Daily Return:", adr
-    print "Cumulative Return:", cr
+    print "Allocations: ", ['%5.3f' % val for val in allocs]
+    print "Sharpe Ratio: %5.3f" % sr
+    print "Volatility (stdev of daily returns): %5.3f" % sddr
+    print "Average Daily Return: %5.3f" % adr
+    print "Cumulative Return: %5.3f" % cr
 
     if gen_plot:
         plot_returns(portfolio_values, spy)
